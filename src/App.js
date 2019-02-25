@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Todos from './Todos';
+import AddTodo from './AddTodo'
 
 class App extends Component {
     state = {
@@ -16,13 +17,21 @@ class App extends Component {
         })
 
         this.setState({todos:newList})
-}
+    }
+
+    addTodo = (todo) => {
+        todo.id = Math.random() * 100;
+        let todos = this.state.todos.slice()
+        this.setState({todos: todos.concat(todo)})
+
+    }
 
     render() {
     return (
       <div className="todo-app container">
       <h1 className="center blue-text">Todo's</h1>
       <Todos todos={this.state.todos} deleteTodo={this.deleteTodo}/>
+      <AddTodo addTodo={this.addTodo}/>
       </div>
     );
     }
